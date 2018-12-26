@@ -40,9 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Storage\Assets\Asset.cs" />
+    <Compile Include="Storage\Assets\IAsset.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\IStorageAssetManager.cs" />
+    <Compile Include="Storage\Metadata\Events\AssetAddedEventArgs.cs" />
+    <Compile Include="Storage\Metadata\Events\AssetDeletedEventArgs.cs" />
+    <Compile Include="Storage\Metadata\Events\EntityAddedEventArgs.cs" />
+    <Compile Include="Storage\Metadata\Events\EntityDeletedEventArgs.cs" />
+    <Compile Include="Storage\Metadata\Events\EntityPropertyUpdatedEventArgs.cs" />
+    <Compile Include="Storage\Metadata\IMetadataAssetManager.cs" />
     <Compile Include="Storage\Metadata\IMetadataStorage.cs" />
+    <Compile Include="Storage\Metadata\MetadataAssetManager.cs" />
+    <Compile Include="Storage\StorageAssetManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="appveyor.yml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
