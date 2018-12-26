@@ -39,6 +39,53 @@
             mMetadataAssetManager.AssetDeleted += MetadataAssetManagerAssetDeleted;
         }
 
+        #endregion
+
+        #region Properties
+
+        public ReadOnlyObservableCollection<IAsset> MetadataAssets { get; }
+
+        #endregion
+
+        #region Public Methods
+
+        public IAsset CreateMetadataAsset()
+        {
+            return mMetadataAssetManager.CreateAsset();
+        }
+
+        public IAsset CreateMetadataAsset(Dictionary<string, object> properties)
+        {
+            IAsset newAsset = CreateMetadataAsset();
+
+            foreach (KeyValuePair<string, object> property in properties)
+            {
+                SetMetadataAssetProperty(newAsset, property.Key, property.Value);
+            }
+
+            return newAsset;
+        }
+
+        public void SetMetadataAssetProperty(IAsset asset, string propertyKey, object propertyValue)
+        {
+            mMetadataAssetManager.SetAssetProperty(asset, propertyKey, propertyValue);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void DeleteAssetRecursively(IAsset assetToDelete)
+        {
+            foreach (IAsset childAsset in assetToDelete.Children)
+            {
+                DeleteAssetRecursively(childAsset);
+                assetToDelete.RemoveChild(childAsset);
+            }
+
+            mChildParentAssetMapping.Remove(assetToDelete);
+        }
+
         private void MetadataAssetManagerAssetAdded(object sender, AssetAddedEventArgs e)
         {
             if (e.ParentAsset == null)
@@ -66,27 +113,6 @@
             {
                 e.ParentAsset.RemoveChild(e.DeletedAsset);
             }
-        }
-
-        #endregion
-
-        #region Properties
-
-        public ReadOnlyObservableCollection<IAsset> MetadataAssets { get; }
-
-        #endregion
-
-        #region Private Methods
-
-        private void DeleteAssetRecursively(IAsset assetToDelete)
-        {
-            foreach (IAsset childAsset in assetToDelete.Children)
-            {
-                DeleteAssetRecursively(childAsset);
-                assetToDelete.RemoveChild(childAsset);
-            }
-
-            mChildParentAssetMapping.Remove(assetToDelete);
         }
 
         #endregion

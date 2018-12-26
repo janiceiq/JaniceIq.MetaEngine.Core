@@ -85,6 +85,23 @@
             return assets;
         }
 
+        public IAsset CreateAsset()
+        {
+            Guid newGuid = mMetadataStorage.CreateEntity();
+
+            return GetAssetForGuid(newGuid);
+        }
+
+        public void DeleteAsset(IAsset asset)
+        {
+            mMetadataStorage.DeleteEntity(asset.Guid);
+        }
+
+        public void SetAssetProperty(IAsset asset, string propertyKey, object propertyValue)
+        {
+            mMetadataStorage.SetEntityProperty(asset.Guid, propertyKey, propertyValue);
+        }
+
         #endregion
 
         #region Private Methods

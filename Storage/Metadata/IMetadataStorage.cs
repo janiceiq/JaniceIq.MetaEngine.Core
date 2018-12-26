@@ -42,38 +42,8 @@
         /// </summary>
         /// <param name="entityGuidToDelete">The unique identifier of the entity to delete.</param>
         void DeleteEntity(Guid entityGuidToDelete);
-
-        /// <summary>
-        /// Sets an entity string property.
-        /// </summary>
-        /// <param name="entityGuid">The entity unique identifier.</param>
-        /// <param name="propertyKey">The property key.</param>
-        /// <param name="propertyValue">The property value.</param>
-        void SetEntityProperty(Guid entityGuid, string propertyKey, string propertyValue);
-
-        /// <summary>
-        /// Sets an entity integer property.
-        /// </summary>
-        /// <param name="entityGuid">The entity unique identifier.</param>
-        /// <param name="propertyKey">The property key.</param>
-        /// <param name="propertyValue">The property value.</param>
-        void SetEntityProperty(Guid entityGuid, string propertyKey, int propertyValue);
-
-        /// <summary>
-        /// Sets an entity double property.
-        /// </summary>
-        /// <param name="entityGuid">The entity unique identifier.</param>
-        /// <param name="propertyKey">The property key.</param>
-        /// <param name="propertyValue">The property value.</param>
-        void SetEntityProperty(Guid entityGuid, string propertyKey, double propertyValue);
-
-        /// <summary>
-        /// Sets an entity boolean property.
-        /// </summary>
-        /// <param name="entityGuid">The entity unique identifier.</param>
-        /// <param name="propertyKey">The property key.</param>
-        /// <param name="propertyValue">if set to <c>true</c> [property value].</param>
-        void SetEntityProperty(Guid entityGuid, string propertyKey, bool propertyValue);
+        
+        void SetEntityProperty(Guid entityGuid, string propertyKey, object propertyValue);
 
         /// <summary>
         /// Gets the entity property.

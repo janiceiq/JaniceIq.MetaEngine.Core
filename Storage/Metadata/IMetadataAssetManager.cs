@@ -30,6 +30,12 @@
         /// <returns>A collection of child assets.</returns>
         ICollection<IAsset> GetAssets(IAsset parentAsset);
 
+        IAsset CreateAsset();
+
+        void DeleteAsset(IAsset asset);
+
+        void SetAssetProperty(IAsset asset, string propertyKey, object propertyValue);
+
         #endregion
     }
 }
