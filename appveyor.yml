@@ -1,0 +1,38 @@
+﻿version: 0.0.{build}-{branch}
+
+branches:
+  only:
+    - master
+
+skip_tags: true
+
+max_jobs: 1
+
+image: Visual Studio 2017
+
+init:
+  - git config --global core.autocrlf input
+
+clone_folder: c:\projects\janiceiq.metaengine.core
+
+clone_depth: 5
+
+matrix:
+  fast_finish: true
+
+platform: x64
+
+configuration: Release
+
+build:
+  parallel: true
+  project: JaniceIq.MetaEngine.Core.sln
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: normal
+
+artifacts:
+  - path: bin\$(configuration)
+    name: JaniceIq.MetaEngine.Core
+  - path: '**\*.nupkg'
