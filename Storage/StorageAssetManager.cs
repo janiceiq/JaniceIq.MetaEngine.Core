@@ -37,6 +37,8 @@
 
             mMetadataAssetManager.AssetAdded += MetadataAssetManagerAssetAdded;
             mMetadataAssetManager.AssetDeleted += MetadataAssetManagerAssetDeleted;
+
+            InitializeMetadataAssets();
         }
 
         #endregion
@@ -112,6 +114,30 @@
             else
             {
                 e.ParentAsset.RemoveChild(e.DeletedAsset);
+            }
+        }
+
+        private void InitializeMetadataAssets()
+        {
+            ICollection<IAsset> rootAssets = mMetadataAssetManager.GetRootAssets();
+
+            foreach (IAsset rootAsset in rootAssets)
+            {
+                mMetadataAssets.Add(rootAsset);
+                InitializeChildAssets(rootAsset);
+            }
+        }
+
+        private void InitializeChildAssets(IAsset parentAsset)
+        {
+            ICollection<IAsset> childAssets = mMetadataAssetManager.GetAssets(parentAsset);
+
+            foreach (IAsset childAsset in childAssets)
+            {
+                mChildParentAssetMapping[childAsset] = parentAsset;
+                parentAsset.AddChild(childAsset);
+
+                InitializeChildAssets(childAsset);
             }
         }
 
