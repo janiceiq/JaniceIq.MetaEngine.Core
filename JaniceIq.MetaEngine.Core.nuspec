@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>JaniceIq.MetaEngine.Core</id>
+    <version>0.0.0-patchthis</version>
+    <authors>Jan Winkler</authors>
+    <owners>Jan Winkler</owners>
+    <licenseUrl>https://github.com/janiceiq/JaniceIq.MetaEngine.Core/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/janiceiq/JaniceIq.MetaEngine.Core/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description></description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags></tags>
+    <dependencies>
+      <dependency id="MSTest.TestAdapter" version="1.4.0" />
+      <dependency id="MSTest.TestFramework" version="1.4.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file
+			src="bin\Release\JaniceIq.MetaEngine.Core.pdb"
+			target="lib\JaniceIq.MetaEngine.Core.pdb"
+			/>
+    <file
+			src="bin\Release\JaniceIq.MetaEngine.Core.dll"
+			target="lib\JaniceIq.MetaEngine.Core.dll"
+			/>
+  </files>
+</package>

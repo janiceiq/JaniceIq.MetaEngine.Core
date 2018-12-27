@@ -12,6 +12,9 @@ image: Visual Studio 2017
 
 init:
   - git config --global core.autocrlf input
+  - ps: $env:customBuildVersion = if ($env:APPVEYOR_REPO_TAG -eq $True) { "$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_BUILD_NUMBER" } else { "$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_BUILD_NUMBER-$env:APPVEYOR_REPO_BRANCH" }
+  - ps: $env:customNugetVersion = if ($env:APPVEYOR_REPO_TAG -eq $True) { "$env:APPVEYOR_BUILD_VERSION" } else { "$env:APPVEYOR_BUILD_VERSION-pre" }
+  - ps: Update-AppveyorBuild -Version $env:customBuildVersion
 
 clone_folder: c:\projects\janiceiq.metaengine.core
 
@@ -35,7 +38,9 @@ build:
   include_nuget_references: true
   verbosity: normal
 
+after_build:
+  - ps: nuget pack .\SharpCaster\SharpCaster.nuspec -Version $env:customNugetVersion
+
 artifacts:
-  - path: bin\$(configuration)
-    name: JaniceIq.MetaEngine.Core
-  - path: '**\*.nupkg'
+  - path: '**\JaniceIq.MetaEngine.Core*.nupkg'
+    name: Nuget
