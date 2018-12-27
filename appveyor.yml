@@ -41,7 +41,7 @@ after_build:
   - ps: nuget pack .\JaniceIq.MetaEngine.Core.nuspec -Version $env:customNugetVersion
 
 artifacts:
-  - path: '**\JaniceIq.MetaEngine.Core*.nupkg'
+  - path: 'JaniceIq.MetaEngine.Core*.nupkg'
     name: NuGet Deployment Package
     type: NuGetPackage
 
