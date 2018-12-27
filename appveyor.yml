@@ -12,7 +12,7 @@ image: Visual Studio 2017
 
 init:
   - git config --global core.autocrlf input
-  - ps: $env:customBuildVersion = $env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_BUILD_NUMBER
+  - ps: $env:customBuildVersion = "$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_BUILD_NUMBER"
   - ps: $env:customNugetVersion = $env:APPVEYOR_BUILD_VERSION
   - ps: Update-AppveyorBuild -Version $env:customBuildVersion
 
