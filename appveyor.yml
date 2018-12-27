@@ -49,7 +49,7 @@ deploy:
   - provider: NuGet
     name: nuget_release
     api_key:
-	  secure: "$env:NUGET_DEPLOYMENT_SECRET_SECURE"
+      secure: "$env:NUGET_DEPLOYMENT_SECRET_SECURE"
     skip_symbols: false
     artifact: /^JaniceIq.MetaEngine.Core.*\.nupkg$/
     on:
