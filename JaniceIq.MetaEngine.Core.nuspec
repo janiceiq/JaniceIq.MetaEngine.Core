@@ -20,11 +20,11 @@
   <files>
     <file
 			src="bin\Release\JaniceIq.MetaEngine.Core.pdb"
-			target="lib\JaniceIq.MetaEngine.Core.pdb"
+			target="lib\net461\JaniceIq.MetaEngine.Core.pdb"
 			/>
     <file
 			src="bin\Release\JaniceIq.MetaEngine.Core.dll"
-			target="lib\JaniceIq.MetaEngine.Core.dll"
+			target="lib\net461\JaniceIq.MetaEngine.Core.dll"
 			/>
   </files>
 </package>
