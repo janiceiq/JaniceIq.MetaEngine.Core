@@ -39,7 +39,7 @@ build:
   verbosity: normal
 
 after_build:
-  - ps: nuget pack .\SharpCaster\SharpCaster.nuspec -Version $env:customNugetVersion
+  - ps: nuget pack .\JaniceIq.MetaEngine.Core.nuspec -Version $env:customNugetVersion
 
 artifacts:
   - path: '**\JaniceIq.MetaEngine.Core*.nupkg'
