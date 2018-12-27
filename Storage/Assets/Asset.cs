@@ -1,12 +1,12 @@
-﻿using System.Runtime.CompilerServices;
-using JaniceIq.MetaEngine.Core.Annotations;
-
-namespace JaniceIq.MetaEngine.Core.Storage.Assets
+﻿namespace JaniceIq.MetaEngine.Core.Storage.Assets
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+    using JaniceIq.MetaEngine.Core.Annotations;
 
     public class Asset : IAsset, INotifyPropertyChanged
     {
@@ -15,6 +15,10 @@ namespace JaniceIq.MetaEngine.Core.Storage.Assets
         private readonly Dictionary<string, object> mProperties;
 
         private readonly ObservableCollection<IAsset> mChildren;
+
+        private readonly Mutex mChildrenMutex;
+
+        private readonly Mutex mPropertiesMutex;
 
         #endregion
 
@@ -29,6 +33,9 @@ namespace JaniceIq.MetaEngine.Core.Storage.Assets
 
             mChildren = new ObservableCollection<IAsset>();
             Children = new ReadOnlyObservableCollection<IAsset>(mChildren);
+
+            mChildrenMutex = new Mutex();
+            mPropertiesMutex = new Mutex();
         }
 
         #endregion
@@ -53,24 +60,40 @@ namespace JaniceIq.MetaEngine.Core.Storage.Assets
 
         public void SetProperty(string propertyKey, object propertyValue)
         {
-            mProperties[propertyKey] = propertyValue;
+            lock (mPropertiesMutex)
+            {
+                mProperties[propertyKey] = propertyValue;
+            }
 
             OnPropertyChanged(nameof(Properties));
         }
 
         public void ClearProperties()
         {
-            mProperties.Clear();
+            lock (mPropertiesMutex)
+            {
+                mProperties.Clear();
+            }
         }
 
         public void AddChild(IAsset assetToAdd)
         {
-            mChildren.Add(assetToAdd);
+            lock (mChildrenMutex)
+            {
+                mChildren.Add(assetToAdd);
+            }
+
+            OnPropertyChanged(nameof(Children));
         }
 
         public void RemoveChild(IAsset assetToRemove)
         {
-            mChildren.Remove(assetToRemove);
+            lock (mChildrenMutex)
+            {
+                mChildren.Remove(assetToRemove);
+            }
+
+            OnPropertyChanged(nameof(Children));
         }
 
         #endregion
