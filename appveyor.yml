@@ -43,14 +43,14 @@ after_build:
 artifacts:
   - path: '**\JaniceIq.MetaEngine.Core*.nupkg'
     name: NuGet Deployment Package
-	type: NuGetPackage
+    type: NuGetPackage
 
 deploy:
   - provider: NuGet
     name: nuget_release
-	api_key:
+    api_key:
       secure: $env:NUGET_DEPLOYMENT_SECRET
     skip_symbols: false
     artifact: /^JaniceIq.MetaEngine.Core.*\.nupkg$/
-	on:
+    on:
       branch: master
