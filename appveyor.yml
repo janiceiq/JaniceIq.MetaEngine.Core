@@ -12,8 +12,8 @@ image: Visual Studio 2017
 
 init:
   - git config --global core.autocrlf input
-  - ps: $env:customBuildVersion = if ($env:APPVEYOR_REPO_TAG -eq $True) { "$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_BUILD_NUMBER" } else { "$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_BUILD_NUMBER-$env:APPVEYOR_REPO_BRANCH" }
-  - ps: $env:customNugetVersion = if ($env:APPVEYOR_REPO_TAG -eq $True) { "$env:APPVEYOR_BUILD_VERSION" } else { "$env:APPVEYOR_BUILD_VERSION-pre" }
+  - ps: $env:customBuildVersion = $env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_BUILD_NUMBER
+  - ps: $env:customNugetVersion = $env:APPVEYOR_BUILD_VERSION
   - ps: Update-AppveyorBuild -Version $env:customBuildVersion
 
 clone_folder: c:\projects\janiceiq.metaengine.core
@@ -34,7 +34,6 @@ build:
   parallel: true
   project: JaniceIq.MetaEngine.Core.sln
   publish_nuget: true
-  publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: normal
 
@@ -43,4 +42,15 @@ after_build:
 
 artifacts:
   - path: '**\JaniceIq.MetaEngine.Core*.nupkg'
-    name: Nuget
+    name: NuGet Deployment Package
+	type: NuGetPackage
+
+deploy:
+  - provider: NuGet
+    name: nuget_release
+	api_key:
+      secure: $env:NUGET_DEPLOYMENT_SECRET
+    skip_symbols: false
+    artifact: /^JaniceIq.MetaEngine.Core.*\.nupkg$/
+	on:
+      branch: master
