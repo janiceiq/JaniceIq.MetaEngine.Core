@@ -8,7 +8,7 @@
     <licenseUrl>https://github.com/janiceiq/JaniceIq.MetaEngine.Core/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/janiceiq/JaniceIq.MetaEngine.Core/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>MetaEngine Core interface for JaniceIq</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags></tags>
