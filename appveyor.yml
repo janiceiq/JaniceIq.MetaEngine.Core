@@ -26,6 +26,7 @@ configuration: Release
 
 before_build:
   - nuget restore JaniceIq.MetaEngine.Core.sln
+  - nuget restore Tests\JaniceIq.MetaEngine.Core.Tests.csproj
 
 build:
   parallel: true
